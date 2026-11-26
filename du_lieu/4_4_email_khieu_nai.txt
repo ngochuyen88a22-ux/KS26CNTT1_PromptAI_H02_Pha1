@@ -1,0 +1,36 @@
+EMAIL KHIẾU NẠI CỦA KHÁCH
+
+Tối 02/11/2026 gia đình tôi 4 người xem 2 suất phim liên tiếp tại phòng 3 của rạp. Cả hai suất đều bị mất tiếng giữa phim hơn 15 phút. Nhân viên soát vé rất lịch sự, tôi không có gì phàn nàn về nhân viên. Tôi đề nghị rạp giải quyết thỏa đáng.
+
+======================================================
+CHÍNH SÁCH ĐỀN BÙ CỦA RẠP PHIM ÁNH DƯƠNG
+======================================================
+
+- loi_ky_thuat: lỗi hình hoặc tiếng trong suất chiếu: hoàn 80.000 đồng/khách cho mỗi suất bị lỗi.
+- ghe_ngoi: ghế hỏng hoặc bị xếp sai ghế: tặng voucher 30.000 đồng/khách.
+- nhan_vien: khiếu nại về thái độ nhân viên: tặng voucher 50.000 đồng/khách.
+- khac: chuyển bộ phận Chăm sóc khách hàng xem xét, chưa đề xuất mức đền bù.
+- Tổng mức đền bù trên 500.000 đồng phải được Quản lý rạp duyệt trước khi gửi khách.
+
+======================================================
+ĐỊNH DẠNG ĐẦU RA CỦA TRẠM 1 (sinh viên viết prompt)
+======================================================
+
+Trạm 1 – đọc email, trả về chỉ một đối tượng JSON gồm đúng 4 trường:
+{"loai_su_co": một trong "loi_ky_thuat" | "ghe_ngoi" | "nhan_vien" | "khac", "so_khach": số nguyên, "so_suat_bi_loi": số nguyên hoặc null, "tom_tat": "không quá 20 từ"}
+
+======================================================
+PROMPT TRẠM 2 (đã có sẵn, không cần viết)
+======================================================
+
+Dưới đây là kết quả phân loại khiếu nại (JSON của Trạm 1) và chính sách đền bù. Chỉ dùng chính sách trong thẻ <chinh_sach> để tính tổng mức đền bù. Trả về đúng một đối tượng JSON, không giải thích:
+{"loai_su_co": ..., "muc_den_bu": tổng số tiền (đồng) hoặc null, "can_duyet": true nếu muc_den_bu trên 500.000, ngược lại false}
+<ket_qua_tram_1>(JSON của Trạm 1)</ket_qua_tram_1>
+<chinh_sach>(chính sách đền bù ở trên)</chinh_sach>
+
+======================================================
+PROMPT TRẠM 3 (đã có sẵn, không cần viết)
+======================================================
+
+Bạn là nhân viên chăm sóc khách hàng của Rạp phim Ánh Dương. Dựa trên JSON trong thẻ <ket_qua_tram_2>, viết email phản hồi khách: xin lỗi, nêu đúng mức đền bù trong JSON, không tự đặt mức khác, giọng điệu chân thành, chuyên nghiệp, dưới 150 từ.
+<ket_qua_tram_2>(JSON của Trạm 2)</ket_qua_tram_2>
